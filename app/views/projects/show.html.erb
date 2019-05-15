@@ -1,0 +1,77 @@
+<li><%= link_to "List of Depedences ", "#"%></li>
+<li><%= link_to "Matrix Experience ", "#"%></li><br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title project" value="{{$project_id}}">Project - <%= @project.name  %></h3>
+      </div>
+      <div class="panel-body">                    
+        <div class="col-md-12">
+          <table class="table table-striped custab">
+            <thead>
+             <tr>
+                <th>Phase</th>
+                <th>Time</th>
+                <th>Weighted of Fitness 1 </th>
+                <th>Weighted of Fitness 2</th>
+            </tr>
+          </thead>
+          <?php
+          foreach($suggestion as $s) { ?>
+          <tr>                           
+            <td>{{$s['number']}}</td>
+            <td>{{$s['time']}}</td>
+            <td>{{$s['payment']}}</td>
+            <td>{{$s['node']}}</td>                            
+          </tr>   
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">List Suggestion</h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+
+
+                    <table class="table table-striped custab">
+                        <thead>
+                           <tr>
+                            <th>Number</th>                                
+                            <th>Number of Phase</th>
+                            <th>Time</th>
+                            <th>Payment (%) - Number of Activity</th>
+                            <th>Fitness</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <?php
+                    foreach($suggestions as $s) { ?>
+                    <tr>                           
+                        <td>{{$s['number']}}</td>
+                        <td id="phase-{{$s['number']}}">{{$num_phase}}</td>
+                        <td id="time-{{$s['number']}}">{{$s['time']}}</td>
+                        <td id="payment-activity-{{$s['number']}}">{{$s['payment_activity']}}</td>
+                        <td id="fit-{{$s['number']}}">{{$s['fit']}}</td>                            
+                        <td class="text-center">
+                            <button type="button" class="btn btn-success save" value="{{$s['number']}}">
+                                <span class="glyphicon glyphicon-save"></span>Save
+                            </button>                               
+                        </td>
+                    </tr>
+                    <?php  } ?>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
