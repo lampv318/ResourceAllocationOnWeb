@@ -1,0 +1,2 @@
+class MatrixExperience < ApplicationRecord
+end
