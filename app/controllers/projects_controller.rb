@@ -1,6 +1,5 @@
 class ProjectsController < ApplicationController
   def index
-    
   end
 
   def show
@@ -25,6 +24,6 @@ class ProjectsController < ApplicationController
   private
   def project_params
     params.require(:project).permit(:user_id, :name, :number_of_task, :number_of_develop,
-      :description, :dependence, :matrix_experience)
+      :description, :dependence, :matrix_experiment, :level_experience)
   end
 end
