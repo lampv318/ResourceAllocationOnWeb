@@ -1,5 +1,27 @@
-<li><%= link_to "List of Depedences ", "#"%></li>
-<li><%= link_to "Matrix Experience ", "#"%></li><br>
+<div class = "container"> 
+  <div class="row">
+    <div class="col-sm-4">
+      <div id = "page-wrapper1">
+        <h5>List of Depedences </h5>
+        <%= break_the_lines( @project.dependence) %>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div id = "page-wrapper1">
+        <h5>Matrix Experience</h5>
+        <%= break_the_lines( @project.matrix_experiment) %>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div id = "page-wrapper1">
+      <h5>Level Experiencee</h5>
+      <%= break_the_lines( @project.level_experience) %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <li><%= link_to "Listf Depedences ", "#"%></li>
+<li><%= link_to "Matrix Experience ", "#"%></li><br> -->
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-success">
@@ -17,8 +39,6 @@
                 <th>Weighted of Fitness 2</th>
             </tr>
           </thead>
-          <?php
-          foreach($suggestion as $s) { ?>
           <tr>                           
             <td>{{$s['number']}}</td>
             <td>{{$s['time']}}</td>
@@ -53,8 +73,6 @@
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    <?php
-                    foreach($suggestions as $s) { ?>
                     <tr>                           
                         <td>{{$s['number']}}</td>
                         <td id="phase-{{$s['number']}}">{{$num_phase}}</td>
@@ -67,7 +85,6 @@
                             </button>                               
                         </td>
                     </tr>
-                    <?php  } ?>
                 </table>
             </div>
         </div>
