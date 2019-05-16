@@ -1,1 +1,27 @@
-new.html.erb
+<%= form_for @project, url: user_projects_path ,:html => {id: "page-wrapper"} do |f| %>
+  <h1>Create New Project</h1>
+
+  <%= f.hidden_field :user_id, value: params[:user_id]  %>
+  
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :number_of_task %>
+  <%= f.text_field :number_of_task %><br>
+
+  <%= f.label :number_of_develop %>
+  <%= f.text_field :number_of_develop %><br>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, cols: "70" %><br><br>
+
+  <%= f.label :dependence %>
+  <%= f.text_area :dependence, rows: "5" %>
+
+  <%= f.label :matrix_experience %>
+  <%= f.text_area :matrix_experience, rows: "5" %><br><br>
+  
+  <%= f.submit "Create", class: "btn btn-primary button1", style: "width: 20px, height: 30px"  %>
+  <!-- <div class = "pull-right thumbnail"> -->
+  </div>
+<% end %>

@@ -23,8 +23,8 @@
             </thead>
               <tr>                           
                 <td><%= link_to project.id, user_project_path(project.id) %></td>
-                <td><%= %></td>
-                <td><%= %></td>
+                <td><%= link_to project.number_of_task, user_project_path(project.id)%></td>
+                <td><%= link_to project.number_of_develop, user_project_path(project.id)%></td>
                 <td><%= project.description%></td>
                 <td> <%= link_to root_path do %>
                   <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -41,7 +41,7 @@
     </div>
   </div>
 <% end %>
-<%= button_to new_user_project_path(@user.id), :method => :get,class: "pull-right thumbnail btn-success" do %>
-  <i class="fa fa-plus-square" aria-hidden="true"></i> NEW PROJECT"
+<%= button_to new_user_project_path(@user.id), :method => :get, class: "pull-right thumbnail btn-success" do %>
+  <i class="fa fa-plus-square" aria-hidden="true"></i> NEW PROJECT
 <% end %>
 <!-- <button class="pull-right thumbnail btn-success"><i class="fa fa-plus-square" aria-hidden="true"></i> NEW PROJECT</button> -->

@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2019_05_15_103721) do
     t.text "dependence"
     t.text "matrix_experience"
     t.integer "user_id"
+    t.integer "number_of_task"
+    t.integer "number_of_develop"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
