@@ -35,12 +35,15 @@ ActiveRecord::Schema.define(version: 2019_05_17_034458) do
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.text "duration"
     t.text "dependence"
     t.text "matrix_experiment"
     t.text "level_experience"
     t.integer "user_id"
     t.integer "number_of_task"
     t.integer "number_of_develop"
+    t.float "weighted_of_fitness_1"
+    t.float "weighted_of_fitness_2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

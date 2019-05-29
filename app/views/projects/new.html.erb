@@ -15,14 +15,29 @@
   <%= f.label :description %>
   <%= f.text_area :description, cols: "70" %><br><br>
 
+  <%= f.label :duration %>
+  <%= f.text_area :duration, rows: "5" %>
+
   <%= f.label :dependence %>
-  <%= f.text_area :dependence, rows: "5" %>
+  <%= f.text_area :dependence, rows: "5" %><br><br>
 
   <%= f.label :matrix_experiment %>
-  <%= f.text_area :matrix_experiment, rows: "5" %><br><br>
+  <%= f.text_area :matrix_experiment, rows: "5" %>
 
   <%= f.label :level_experience %>
   <%= f.text_area :level_experience, rows: "5" %><br><br>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <%= f.label :weighted_of_fitness_1 %>
+      <%= f.text_field :weighted_of_fitness_1 %>
+    </div>
+    <div class="col-sm-6">
+      <%= f.label :weighted_of_fitness_2 %>
+      <%= f.text_field :weighted_of_fitness_2 %>
+    </div>
+
+  </div><br>
   
   <%= f.submit "Create", class: "btn btn-primary button1", style: "width: 20px, height: 30px"  %>
   <!-- <div class = "pull-right thumbnail"> -->

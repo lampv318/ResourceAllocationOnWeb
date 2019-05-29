@@ -21,9 +21,16 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def run_project
+    GeneticHelper.get_best(5)
+    redirect_to root_path
+  end
+
   private
+  
   def project_params
     params.require(:project).permit(:user_id, :name, :number_of_task, :number_of_develop,
-      :description, :dependence, :matrix_experiment, :level_experience)
+      :description, :duration, :dependence, :matrix_experiment, :level_experience,
+      :weighted_of_fitness_1, :weighted_of_fitness_2)
   end
 end
