@@ -4,11 +4,11 @@ module Strategies
   CROSSOVER = 2
 end
 
-class Chromosom 
+class Chromosom   
   attr_accessor :genes
   attr_accessor :fitness
   attr_accessor :strategy
-  
+
   def initialize(genes, fitness, strategy)
     @genes = genes
     @fitness = fitness
@@ -44,19 +44,23 @@ end
 
 def generate_parent
   genes = generate_genes(10)
-  fitness = 0.99
-  # puts "generate parent successfully"
-  return Chromosom.new(genes, fitness, Project.strategies[:MUTATE])
+  fitness = get_fitness_of_duration(genes)
+  return Chromosom.new(genes, fitness, Project.strategies[:CREATE])
 end
 
+def get_value(arr1, arr2, arr3, arr4)
+  $duration = arr1
+  $dependence = arr2
+  $treq = arr3
+  $lexp = arr4
+end
 
 module GeneticHelper
-
-  def self.get_best(poolSize)
+  def get_best(poolSize)
     bestParent = generate_parent
+    # convert_to_arr("1 2")
     display(bestParent)
     puts generate_code(10)
-    byebug
     parents = [bestParent]
     for i in 0..poolSize
       parent = generate_parent
@@ -74,6 +78,41 @@ module GeneticHelper
 
   def self.get_improvement
     puts "concac"
+  end
+end
+
+def get_fitness_of_duration(genes)
+  totalDelay = 0 
+  numberOfTask = $duration.count
+  for i in 1..numberOfTask
+    timeSched = genes[i][0]
+    timeStart = get_time_start(genes, i)
+    timeDelay = get_time_delay(timeSched, timeStart)
+    totalDelay += timeDelay
+  end
+  return totalDelay/$duration.count
+end
+
+def get_time_start(genes, taskIndex)
+  timeStartMax = 0
+  for i in 0..$dependence.count-1
+    if $dependence[i][1] == taskIndex
+      timeSched = genes[$dependence[i][0]][0]
+      timeDuration = $duration[$dependence[i][0]-1][1] 
+      timeTemp = timeSched + timeDuration
+      if timeStartMax < timeTemp
+        timeStartMax = timeTemp
+      end
+    end
+  end
+  return timeStartMax
+end
+
+def get_time_delay(timeSched, timeStart)
+  if timeSched < timeStart
+    return 0
+  else
+    return Float(1)/(1 + (timeSched - timeStart))  
   end
 end
 
