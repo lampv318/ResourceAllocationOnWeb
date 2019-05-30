@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
     lexp = convert_lexp(params[:level_experience])
     # fitness = get_fitness_of_duration(duration, dependence)
     get_value(duration, dependence, treq, lexp)
-    get_best(5)
+    get_best(100)
     redirect_to root_path
   end
 
