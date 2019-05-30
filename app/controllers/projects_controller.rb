@@ -22,7 +22,13 @@ class ProjectsController < ApplicationController
   end
 
   def run_project
-    GeneticHelper.get_best(5)
+    duration = convert_to_arr(params[:duration])
+    dependence = convert_to_arr(params[:dependence])
+    treq = convert_treq(params[:matrix_experiment])
+    lexp = convert_lexp(params[:level_experience])
+    # fitness = get_fitness_of_duration(duration, dependence)
+    get_value(duration, dependence, treq, lexp)
+    get_best(5)
     redirect_to root_path
   end
 
