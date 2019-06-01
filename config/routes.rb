@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   delete "/logout",  to: "sessions#destroy"
   # get "/run_project", to: "projects#run_project"
   post "/run_project", to: "projects#run_project"
+  get "run_project", to: "projects#run_project"
   resources :users do
     resources :projects
   end
