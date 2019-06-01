@@ -29,8 +29,11 @@ class ProjectsController < ApplicationController
     weighted_of_fitness_1 = params[:weighted_of_fitness_1]
     weighted_of_fitness_2 = params[:weighted_of_fitness_2]
     get_value(duration, dependence, treq, lexp, weighted_of_fitness_1, weighted_of_fitness_2)
-    get_best(100)
-    redirect_to root_path
+    project_id = params[:project_id].to_i
+    @parents1 = get_best(100)
+    @parents = @parents1.reverse.paginate(page: params[:page], per_page: 10)
+    # @parents = Kaminari.page params[:page]
+    # redirect_to user_project_path(current_user.id, project_id, param: parents)
   end
 
   private
