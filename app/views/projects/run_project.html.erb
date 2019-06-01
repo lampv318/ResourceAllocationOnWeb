@@ -1,3 +1,4 @@
+<% projectId = params[:project_id] %>
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-success">
@@ -23,9 +24,15 @@
               <td id=""><%= parent.genes %></td>
               <td id=""><%= parent.fitness %></td>                            
               <td class="text-center">
-                  <button type="button" class="btn btn-success save" value="{{$s['number']}}">
+                <%= form_for @suggestion, url: project_suggestions_path(project_id: projectId) do |f| %>
+                  <%= f.hidden_field :genes, value: parent.genes %>
+                  <%= f.hidden_field :fitness, value: parent.fitness %>
+                  <%= f.hidden_field :project_id, value: projectId %>
+                  <%= f.submit "Save", class: "btn btn-success save" %>
+<!--                   <button type="button" class="btn btn-success save" value="{{$s['number']}}">
                       <span class="glyphicon glyphicon-save"></span>Save
-                  </button>                               
+                  </button>   -->
+                <% end %>                             
               </td>
             </tr>
             <% end %>

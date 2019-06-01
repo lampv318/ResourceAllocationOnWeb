@@ -105,17 +105,17 @@
 					      <th class="text-center">Action</th>
 				    	</tr>
 				  	</thead>
-				  	<% if @parents %>
-				  	<% @parents.each do parent %>
+				  	<% if @suggestion %>
+				  	<% @suggestion.each do |suggestion| %>
 					  <tr>                           
 				      <td>1</td>
 				      <td id="phase-{{$s['number']}}">500</td>
 				      <td id="time-{{$s['number']}}">1.01</td>
-				      <td id="payment-activity-{{$s['number']}}">1: [0, '0001010101'], 2: [0, '0001010100'], 3: [10, '1011000101'], 4: [10, '0000001100'], 5: [30, '1100010101'], 6: [15, '1011011011'], 7: [45, '0001001101'], 8: [55, '1010000001'], 9: [35, '1110111010'], 10: [70, '1001000000']</td>
-				      <td id="fit-{{$s['number']}}">0.98925612984</td>                            
+				      <td id="payment-activity-{{$s['number']}}"><%= suggestion.genes %></td>
+				      <td id="fit-{{$s['number']}}"><%= suggestion.fitness %></td>                            
 				      <td class="text-center">
-				          <button type="button" class="btn btn-success save" value="{{$s['number']}}">
-				              <span class="glyphicon glyphicon-save"></span>Save
+				          <button type="button" class="btn btn-danger">
+				            <i class="fa fa-trash"></i>
 				          </button>                               
 				      </td>
 					  </tr>

@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_17_034458) do
+ActiveRecord::Schema.define(version: 2019_06_01_124533) do
 
   create_table "chromosomes", force: :cascade do |t|
+    t.integer "project_id"
     t.string "genes"
     t.integer "strategy"
     t.float "fitness"
@@ -44,6 +45,16 @@ ActiveRecord::Schema.define(version: 2019_05_17_034458) do
     t.integer "number_of_develop"
     t.float "weighted_of_fitness_1"
     t.float "weighted_of_fitness_2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "suggestions", force: :cascade do |t|
+    t.integer "project_id"
+    t.string "genes"
+    t.integer "strategy"
+    t.float "fitness"
+    t.string "chromosome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

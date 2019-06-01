@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @suggestion = @project.suggestions
   end
 
   def new
@@ -22,6 +23,7 @@ class ProjectsController < ApplicationController
   end
 
   def run_project
+    @suggestion = Suggestion.new
     duration = convert_to_arr(params[:duration])
     dependence = convert_to_arr(params[:dependence])
     treq = convert_treq(params[:matrix_experiment])
