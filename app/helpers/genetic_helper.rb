@@ -62,18 +62,16 @@ module GeneticHelper
     $treq = arr3
     $lexp = arr4
     $timeMax = 0
-    $weighted_of_fitness_1 = weighted_1
-    $weighted_of_fitness_2 = weighted_2
+    $weighted_of_fitness_1 = weighted_1.to_f
+    $weighted_of_fitness_2 = weighted_2.to_f
     $duration.each do |task|
       $timeMax += task[1]
     end
   end
 
   def get_fitness(genes)
-    fitness_first = get_fitness_of_duration(genes)*0.9
-    fitness_second = get_fitness_of_exp(genes)*0.1
-    # fitness_first = get_fitness_of_duration(genes)*$weighted_of_fitness_1
-    # fitness_second = get_fitness_of_exp(genes)*$weighted_of_fitness_2
+    fitness_first = get_fitness_of_duration(genes)*$weighted_of_fitness_1
+    fitness_second = get_fitness_of_exp(genes)*$weighted_of_fitness_2
     fitness_third = get_fitness_of_assignment(genes)
     return (fitness_first + fitness_second + fitness_third)*0.5
   end

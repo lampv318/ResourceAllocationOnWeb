@@ -74,7 +74,7 @@ module GeneticLibHelper
 
   def new_child(parent, parents)
     rate = rand(0..100)
-    if rate > 40
+    if rate > 70
       return crossover(parent, parents)
     else
       return mutate(parent)
