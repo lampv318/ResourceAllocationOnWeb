@@ -44,7 +44,11 @@ end
 
 def generate_parent
   genes = generate_genes(10)
-  fitness = get_fitness_of_duration(genes)
+  fitness = get_fitness(genes, 0.9, 0.1)
+  # genes = {1=>[49, "0000000101"], 2=>[35, "0000000100"], 3=>[61, "0001000000"],
+  #   4=>[67, "0000000101"], 5=>[44, "0000000100"], 6=>[19, "0000000100"], 
+  #   7=>[62, "0000010000"], 8=>[56, "0000000001"], 9=>[34, "0000000100"], 10=>[95, "0001000000"]}
+  # fitness = get_fitness_of_exp(genes)
   return Chromosom.new(genes, fitness, Project.strategies[:CREATE])
 end
 
@@ -79,6 +83,13 @@ module GeneticHelper
   def self.get_improvement
     puts "concac"
   end
+end
+
+def get_fitness(genes, weighted_of_finess_1, weighted_of_finess_2)
+  fitness_first = get_fitness_of_duration(genes)*weighted_of_finess_1
+  fitness_second = get_fitness_of_exp(genes)*weighted_of_finess_2
+  fitness_third = get_fitness_of_assignment(genes)
+  return (fitness_first + fitness_second + fitness_third)*0.5
 end
 
 def get_fitness_of_duration(genes)
@@ -116,4 +127,88 @@ def get_time_delay(timeSched, timeStart)
   end
 end
 
+def get_fitness_of_exp(genes)
+  numberOfTask = genes.count
+  assignedDevelop = []
+  temp = 0
+  for i in 1..numberOfTask 
+    taskInfor = genes[i][1]
+    for k in 0...taskInfor.length
+      if taskInfor[k] == "1"
+        assignedDevelop.append(k+1)
+      end
+    end
+    temp += ex_all_of_task(i, assignedDevelop)
+  end
+  return temp/numberOfTask
+end
 
+def ex_all_of_task(indexOfTask, assignedDevelop)
+  task_exp = 0
+  numberOfSkill = 0
+  count = $treq[1].count
+  for i in 0..count
+    if $treq[indexOfTask][i] == 1
+      numberOfSkill += 1
+      task_exp += total_experience(assignedDevelop, i)
+    end
+  end
+  return task_exp/numberOfSkill
+end
+
+def total_experience(assignedDevelop, indexOfSkill)
+  numberOfDevelop = assignedDevelop.count
+  return 0 if numberOfDevelop == 0
+  treq_exp_ik = 0
+  max_exp = 0
+  for i in 0...numberOfDevelop
+    index = assignedDevelop[i]
+    if max_exp < $lexp[index][indexOfSkill]
+      max_exp = $lexp[index][indexOfSkill]
+    end
+    treq_exp_ik += $lexp[index][indexOfSkill]
+  end
+  return max_exp + treq_exp_ik/numberOfDevelop
+end
+
+def get_fitness_of_assignment(genes)
+  numberDevelop = genes[1][1].length
+  taskAssignment = 0
+  for i in 0...numberDevelop #develop
+    timeTask = []
+    numberOfConflict = 0
+    numberOfAssignment = 0
+    assgnmentTask = []
+    for k in 1..genes.count # k = task
+      assgnmentTask.append(k) if genes[k][1][i] == "1"
+    end
+    for j in 0...assgnmentTask.count
+      temp = []
+      temp.append(genes[assgnmentTask[j]][0])
+      timeFinish = genes[assgnmentTask[j]][0] + $duration[assgnmentTask[j]-1][1]
+      temp.append(timeFinish)
+      timeTask.append(temp)
+      numberOfAssignment +=1
+    end
+    numberOfConflict = CaculateConflict(timeTask)
+    if numberOfAssignment == 0
+      taskAssignment += 1
+    else
+      taskAssignment += 1 - Float(numberOfConflict)/assgnmentTask.count
+    end
+  end
+  return taskAssignment/numberDevelop
+end
+
+def CaculateConflict(arr)
+  numberOfConflict = 0
+  for i in 0...arr.count
+    for k in 0...arr.count
+      next if k == i 
+      if arr[i][1] > arr[k][0] && arr[i][1] < arr[k][1]
+        numberOfConflict += 1
+      end
+    end
+  end
+  return numberOfConflict
+end
