@@ -26,8 +26,9 @@ class ProjectsController < ApplicationController
     dependence = convert_to_arr(params[:dependence])
     treq = convert_treq(params[:matrix_experiment])
     lexp = convert_lexp(params[:level_experience])
-    # fitness = get_fitness_of_duration(duration, dependence)
-    get_value(duration, dependence, treq, lexp)
+    weighted_of_fitness_1 = params[:weighted_of_fitness_1]
+    weighted_of_fitness_2 = params[:weighted_of_fitness_2]
+    get_value(duration, dependence, treq, lexp, weighted_of_fitness_1, weighted_of_fitness_2)
     get_best(100)
     redirect_to root_path
   end
