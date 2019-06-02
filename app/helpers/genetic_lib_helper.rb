@@ -102,30 +102,30 @@ module GeneticLibHelper
     tempSelect = []
     selectedParents = []
 
-    # for k in 0..5
+    for k in 0..100
 
-    #   parentIndex = lastParentIndex
-    #   # select new population
-    #   for i in 0...50
-    #     tempParent = parents[parentIndex] 
-    #     selectedParents.append(tempParent)
-    #     parentIndex -= 1
-    #   end
-    #   tempSelect = selectedParents
-    #   for ind in 0...50
-    #     parent = tempSelect[ind]
-    #     child = new_child(parent, parents)
-    #     # child = generate_parent
-    #     selectedParents.append(child)
-    #     if child.fitness > bestParent.fitness
-    #       bestParent = child
-    #       display(bestParent)
-    #     end
-    #   end
-    #   parents = selectedParents
-    #   parents = parents.sort_by{ |parent| parent.fitness } # >> tang dan 
-    #   selectedParents = [] 
-    # end
+      parentIndex = lastParentIndex
+      # select new population
+      for i in 0...50
+        tempParent = parents[parentIndex] 
+        selectedParents.append(tempParent)
+        parentIndex -= 1
+      end
+      tempSelect = selectedParents
+      for ind in 0...50
+        parent = tempSelect[ind]
+        child = new_child(parent, parents)
+        # child = generate_parent
+        selectedParents.append(child)
+        if child.fitness > bestParent.fitness
+          bestParent = child
+          display(bestParent)
+        end
+      end
+      parents = selectedParents
+      parents = parents.sort_by{ |parent| parent.fitness } # >> tang dan 
+      selectedParents = [] 
+    end
     return parents
 
   end
