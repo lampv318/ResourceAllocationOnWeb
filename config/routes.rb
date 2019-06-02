@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post   "/login",   to: "sessions#create"
   delete "/logout",  to: "sessions#destroy"
   post "/run_project", to: "projects#run_project"
-  get "run_project", to: "projects#run_project"
+  get "/run_project", to: "projects#run_project_show"
   resources :users do
     resources :projects
   end

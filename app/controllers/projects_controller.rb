@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
-      flash[:success] = "Successfully"
+      flash.now[:success] = "Successfully"
       redirect_to user_path current_user
     else
       flash[:danger] = "Something went wrong"
@@ -34,8 +34,6 @@ class ProjectsController < ApplicationController
     project_id = params[:project_id].to_i
     @parents1 = get_best(100)
     @parents = @parents1.reverse.paginate(page: params[:page], per_page: 10)
-    # @parents = Kaminari.page params[:page]
-    # redirect_to user_project_path(current_user.id, project_id, param: parents)
   end
 
   private
