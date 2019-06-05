@@ -5,4 +5,11 @@ class ApplicationController < ActionController::Base
   include GeneticHelper
   include ConvertHelper
   include GeneticLibHelper
+
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "Please Login"
+      redirect_to root_path
+    end
+  end
 end

@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action :logged_in_user
+
   def index
   end
 
@@ -9,7 +11,6 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    byebug
   end
 
   def create
