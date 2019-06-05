@@ -17,6 +17,7 @@ gem "bootstrap-sass", "3.3.7"
 gem "font-awesome-rails"
 gem "jquery-rails"
 gem "will_paginate"
+gem "rails_admin"
 
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console

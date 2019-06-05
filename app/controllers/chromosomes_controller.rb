@@ -1,7 +1,6 @@
 class ChromosomesController < ApplicationController
   def run_project
     @chromosome = Chromosome.new
-    # byebug
     @chromosome.genes = Chromosome.generate_genes(11)
     redirect_to root_path
   end

@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    byebug
   end
 
   def create

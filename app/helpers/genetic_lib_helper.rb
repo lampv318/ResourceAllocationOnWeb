@@ -115,7 +115,6 @@ module GeneticLibHelper
       for ind in 0...50
         parent = tempSelect[ind]
         child = new_child(parent, parents)
-        # child = generate_parent
         selectedParents.append(child)
         if child.fitness > bestParent.fitness
           bestParent = child
