@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root "sessions#new"
   get "/login", to: "sessions#new"
   get  "/signup",  to: "users#new"
